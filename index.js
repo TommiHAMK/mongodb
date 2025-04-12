@@ -18,10 +18,44 @@ mongoose.connect(dbURI)
 
 const Product = require('./models/Product');
 
+/*
 const newProduct = new Product({
     name: 'Chair',
     price: 100
 });
 
-newProduct.save();
+newProduct.save()
+.then((result) => {
+    console.log(result);
+})
+.catch((err) => {
+    console.log(err);
+})
+*/
+
+/*
+Product.find()
+.then((result) => {
+    console.log(result);
+})
+.catch((err) => {
+    console.log(err);
+})
+*/
+
+/*
+const getAll = async () => {
+    try 
+    {
+        const result = await Product.find();
+        console.log(result);
+    }
+    catch{
+        console.log(err);
+    }
+}
+getAll();
+*/
+
+
 
