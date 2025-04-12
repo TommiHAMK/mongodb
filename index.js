@@ -16,5 +16,12 @@ mongoose.connect(dbURI)
     console.log(err);
 });
 
- 
+const Product = require('./models/Product');
+
+const newProduct = new Product({
+    name: 'Chair',
+    price: 100
+});
+
+newProduct.save();
 
