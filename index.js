@@ -1,11 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const exphbs = require('express-handlebars');
 require('dotenv').config();
 
+const app = express();
+
+app.engine('handlebars',exphbs.engine({
+    defaultLayout: 'main'
+}));
+
+app.set('view engine','handlebars');
 
 const dbURI ='mongodb+srv://'+process.env.DBUSERNAME+':'+process.env.DBPASSWORD+'@'+process.env.CLUSTER+'.mongodb.net/'+process.env.DB+'?retryWrites=true&w=majority&appName=Cluster0';
 //console.log(dbURI);
-const app = express();
+
 
 mongoose.connect(dbURI)
 .then((result) =>
@@ -59,7 +67,7 @@ const getAll = async () => {
 getAll();
 */
 
-app.get('/products', async (req,res) => {
+app.get('/api/products', async (req,res) => {
     try {
         const result = await Product.find();
         res.json(result);
@@ -69,7 +77,7 @@ app.get('/products', async (req,res) => {
     }
 });
 
-app.get('/products/:id', async (req,res) => {
+app.get('/api/products/:id', async (req,res) => {
     const id = req.params.id;
         const product = await Product.findById(id);
         res.json(product);
