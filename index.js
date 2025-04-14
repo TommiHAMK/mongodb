@@ -5,11 +5,11 @@ require('dotenv').config();
 
 const app = express();
 
-app.engine('handlebars',exphbs.engine({
+app.engine('handlebars', exphbs.engine({
     defaultLayout: 'main'
 }));
 
-app.set('view engine','handlebars');
+app.set('view engine', 'handlebars'); 
 
 const dbURI ='mongodb+srv://'+process.env.DBUSERNAME+':'+process.env.DBPASSWORD+'@'+process.env.CLUSTER+'.mongodb.net/'+process.env.DB+'?retryWrites=true&w=majority&appName=Cluster0';
 //console.log(dbURI);
@@ -67,6 +67,8 @@ const getAll = async () => {
 getAll();
 */
 
+
+
 app.get('/api/products', async (req,res) => {
     try {
         const result = await Product.find();
@@ -83,7 +85,9 @@ app.get('/api/products/:id', async (req,res) => {
         res.json(product);
 });
 
-
+app.get('/', (req,res) => {
+    res.render('index');
+});
 
 
 
