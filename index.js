@@ -106,6 +106,14 @@ app.get('/products' , async (req,res) => {
     }
 });
 
+// CREATE 
+app.get('/add-product', (req,res) => {
+    res.render('add-product',{
+        title: 'Add Product'
+    });
+});
+
+// HOME
 app.get('/', (req,res) => {
     res.render('index');
 });
