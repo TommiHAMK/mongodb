@@ -89,11 +89,12 @@ app.get('/api/products/:id', async (req,res) => {
 // Find products from the MongoDB and print to the webpage
 app.get('/products' , async (req,res) => {
     try {
-        const result = await Product.find();
+        const products = await Product.find();
         //res.json(result);
         res.render('products',
             {
-                title: 'Our Products'
+                title: 'Our Products!',
+                products: products.map(product => product.toJSON())
             }
         )
     }
