@@ -85,9 +85,27 @@ app.get('/api/products/:id', async (req,res) => {
         res.json(product);
 });
 
+
+// Find products from the MongoDB and print to the webpage
+app.get('/products' , async (req,res) => {
+    try {
+        const result = await Product.find();
+        //res.json(result);
+        res.render('products',
+            {
+                title: 'Our Products'
+            }
+        )
+    }
+    catch (error) {
+        res.status(404).render('products', {
+            title: 'Something is wrong'
+        })
+        console.log(error);
+    }
+});
+
 app.get('/', (req,res) => {
     res.render('index');
 });
-
-
 
