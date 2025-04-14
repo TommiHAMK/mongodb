@@ -5,11 +5,15 @@ require('dotenv').config();
 
 const app = express();
 
+// With this middleware we can get the data from HTML form
+app.use(express.urlencoded({extended: false}));
+
 app.engine('handlebars', exphbs.engine({
     defaultLayout: 'main'
 }));
 
 app.set('view engine', 'handlebars'); 
+
 
 const dbURI ='mongodb+srv://'+process.env.DBUSERNAME+':'+process.env.DBPASSWORD+'@'+process.env.CLUSTER+'.mongodb.net/'+process.env.DB+'?retryWrites=true&w=majority&appName=Cluster0';
 //console.log(dbURI);
@@ -112,6 +116,17 @@ app.get('/add-product', (req,res) => {
         title: 'Add Product'
     });
 });
+
+app.post('/products', async (req,res) => {
+    //console.log('Info' + req.body);
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+    res.send('Added product: '+ newProduct.name);
+});
+
+// DELETE
+
+// UPDATE
 
 // HOME
 app.get('/', (req,res) => {
